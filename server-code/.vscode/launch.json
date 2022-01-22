@@ -14,7 +14,7 @@
             "cwd": "${workspaceFolder}",
             "runtimeExecutable": "npm",
             "runtimeArgs": [ "start" ],
-            "env": { "DEBUG": "express:* express-starter:server" },
+            "env": { "DEBUG": "express:* express-starter:server", "MONGODB_PWD": "BbpVaWbr8y8Kn7Ta" },
             "console": "integratedTerminal"
         }
     ]
