@@ -1,3 +1,4 @@
 # Form Automation Learning Project
 
-![Form demo] (/img/demo.png)
+
+![Form demo](/img/demo.png)
