@@ -2,18 +2,36 @@ import express from 'express';
 
 var router = express.Router();
 
-/* GET home page. */
+/* GET test. */
 router.get('/', function(req, res) {
   res.send('hi');
 });
 
-// to do
 router.get('/cards', async (req, res) => {
-    let cards = await req.db.Card.find();
+    try {
+        let cards = await req.db.Card.find();
+        let summary = cards.map(card => {
+            return {min_age: card.min_age,
+                max_age: card.max_age,
+                sub_domain: card.sub_domain,
+                platform: card.platform,
+                context: card.context,
+                research_title: card.research_title,
+                key_words: card.key_words,
+                summary: card.summary}
+        })
+        res.json(summary);
+    } catch(e) {
+        let jsonErrorResponse = {
+            status: "error",
+            error: "error: " + e
+        }
+        res.type('json');
+        res.send(JSON.stringify(jsonErrorResponse));
+    }
 
 });
 
-// to do
 router.get('/card/:cardID', async (req, res) => {
     try {
         let card = await req.db.Card.findById(req.params.cardID);
@@ -46,25 +64,25 @@ router.delete('/card/:cardID', async (req, res) => {
     }
 });
 
-// to do
-router.patch('/card/:cardID', async (req, res) => {
-    try {
-        let card = req.db.Card.findOne(req.params.cardID);
-        // to do
-    } catch(e) {
-        let jsonErrorResponse = {
-            status: "error",
-            error: "error: " + e
-        }
-        res.type('json');
-        res.send(JSON.stringify(jsonErrorResponse));
-    }
-});
+// // to do
+// router.patch('/card/:cardID', async (req, res) => {
+//     try {
+//         let card = req.db.Card.findOne(req.params.cardID);
+//         // to do
+//     } catch(e) {
+//         let jsonErrorResponse = {
+//             status: "error",
+//             error: "error: " + e
+//         }
+//         res.type('json');
+//         res.send(JSON.stringify(jsonErrorResponse));
+//     }
+// });
 
 // to do
 router.post('/card', async (req, res) => {
     try{
-        const newPost = new req.db.Post({
+        const newCard = new req.db.Card({
             submitter_name: req.body.submitter_name,
             submitter_email: req.body.submitter_email,
             paper_title: req.body.paper_title,
@@ -73,33 +91,33 @@ router.post('/card', async (req, res) => {
             subject: req.body.subject,
             tech_system: req.body.tech_system,
             goal: req.body.goal,
-            goal_descr: String,
-            activity: String,
-            support: String,
-            interaction: String,
-            insight: String,
-            principles: String,
-            success: String,
-            unsuccess: String,
-            takaways: String,
-            // card summary
-            min_age: Number,
-            max_age: Number,
-            sub_domain: [String],
-            platform: String,
-            context: String,
-            research_title: String,
-            key_words: [String],
-            summary: String
+            goal_descr: req.body.goal_descr,
+            activity: req.body.activity,
+            support: req.body.support,
+            interaction: req.body.interaction,
+            insight: req.body.insight,
+            principles: req.body.principles,
+            success: req.body.success,
+            unsuccess: req.body.unsuccess,
+            takaways: req.body.takaways,
+            min_age: req.body.min_age,
+            max_age: req.body.max_age,
+            sub_domain: req.body.sub_domain,
+            platform: req.body.platform,
+            context: req.body.context,
+            research_title: req.body.research_title,
+            key_words: req.body.key_words,
+            summary: req.body.summary
         });
-        let response = await newPost.save();
+
+        let response = await newCard.save();
 
         res.type('json');
         res.send("{status: 'success'}");
-    }catch(error){
+    }catch(e){
         let jsonErrorResponse = {
             status: "error",
-            error: "error: " + error
+            error: "error: " + e
         }
         res.type('json');
         res.send(JSON.stringify(jsonErrorResponse));
