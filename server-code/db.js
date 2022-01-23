@@ -11,11 +11,11 @@ async function main() {
   console.log("connected to mongodb")
 
 
-  const fullCardSchema = new mongoose.Schema({
+  const CardSchema = new mongoose.Schema({
     submitter_name: String,
     submitter_email: String,
     paper_title: String,
-    author: [String],
+    authors: [String],
     domain: [String],
     subject: [String],
     tech_system: Boolean,
@@ -37,11 +37,11 @@ async function main() {
     context: String,
     research_title: String,
     key_words: [String],
-    summary: String
+    summary: String // who + what + why
 
   });
 
-  db.FullCard = mongoose.model('FullCard', fullCardSchema);
+  db.Card = mongoose.model('Card', CardSchema);
 
 //   const cardSchema = new mongoose.Schema({
 //     full_card: {type: mongoose.Schema.Types.ObjectId, ref: 'FullCard'},
