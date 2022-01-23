@@ -20,6 +20,7 @@ code {
 .buttons {
   display: block;
   width: fit-content;
+  color: #FFF5F2;
 }
 
 .flex-container {
@@ -28,4 +29,14 @@ code {
   justify-content: center;
   width:60%;
   margin: 0 20%;
+}
+
+.page-title {
+  font-family: 'Chivo Bold', 'Chivo', sans-serif;
+  font-weight: 700;
+  color: #5D59FF;
+}
+
+.form-input, .form-info {
+  font-family: 'Manrope', sans-serif;
 }
