@@ -29,7 +29,6 @@ router.get('/cards', async (req, res) => {
         res.type('json');
         res.send(JSON.stringify(jsonErrorResponse));
     }
-
 });
 
 router.get('/card/:cardID', async (req, res) => {
@@ -79,7 +78,6 @@ router.delete('/card/:cardID', async (req, res) => {
 //     }
 // });
 
-// to do
 router.post('/card', async (req, res) => {
     try{
         const newCard = new req.db.Card({
